@@ -1,4 +1,3 @@
-
 #pragma config(Motor,  port1,           Right,         tmotorVex393_HBridge, openLoop, reversed)
 #pragma config(Motor,  port6,           Claw,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port7,           Arm,           tmotorVex393_MC29, openLoop)
@@ -27,8 +26,8 @@ task main()
 				}
 
 				if (vexRT[Ch4] < 0){
-					motor[Left] = motorpower + (vexRT[Ch4]*0.25);
-					motor[Right] = motorpower - (vexRT[Ch4]*0.35);
+					motor[Left] = -motorpower - (vexRT[Ch4]*0.25);
+					motor[Right] = -motorpower + (vexRT[Ch4]*0.35);
 				}
 			}
 			waitUntil(vexRT[Btn6D] == 0);
@@ -51,8 +50,8 @@ task main()
 				}
 
 				if (vexRT[Ch4] < 0){
-					motor[Left] = -motorpower - (vexRT[Ch4]*0.25);
-					motor[Right] = -motorpower + (vexRT[Ch4]*0.35);
+					motor[Left] = motorpower + (vexRT[Ch4]*0.25);
+					motor[Right] = motorpower - (vexRT[Ch4]*0.35);
 				}
 			}
 			waitUntil(vexRT[Btn5D] == 0);
