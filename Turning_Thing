@@ -26,8 +26,8 @@ task main()
 				}
 
 				if (vexRT[Ch4] < 0){
-					motor[Left] = -motorpower - (vexRT[Ch4]*0.25);
-					motor[Right] = -motorpower + (vexRT[Ch4]*0.35);
+					motor[Left] = motorpower + (vexRT[Ch4]*0.25);
+					motor[Right] = motorpower - (vexRT[Ch4]*0.35);
 				}
 			}
 			waitUntil(vexRT[Btn6D] == 0);
@@ -50,13 +50,45 @@ task main()
 				}
 
 				if (vexRT[Ch4] < 0){
-					motor[Left] = motorpower + (vexRT[Ch4]*0.25);
-					motor[Right] = motorpower - (vexRT[Ch4]*0.35);
+					motor[Left] = -motorpower - (vexRT[Ch4]*0.25);
+					motor[Right] = -motorpower + (vexRT[Ch4]*0.35);
 				}
 			}
 			waitUntil(vexRT[Btn5D] == 0);
 			motor[Left] = 0;
 			motor[Right] = 0;
+		}
+		
+		if (vexRT[Btn6U] == 0){
+			if(vexRT[Ch2]>20){
+				
+				motor[Arm] = 127; 
+			
+			}else if(vexRT[Ch2]<-20){
+			
+				motor[Arm] = -127; 
+				
+			}else{
+			
+				motor[Arm] = 0; 
+			
+			}
+		}else{
+		motor[Left]  = (vexRT[Ch2] + vexRT[Ch1])/2;  // (y + x)/2
+		motor[Right] = (vexRT[Ch2] - vexRT[Ch1])/2;  // (y - x)/2			
+		}
+		
+		if(vexRT[Btn8R] == 1)       	//If Button 6U is pressed...
+		{
+			motor[Claw] = 127;  		//...close the gripper.
+		}
+		else if(vexRT[Btn8D] == 1)  	//Else, if button 6D is pressed...
+		{
+			motor[Claw] = -127; 		//...open the gripper.
+		}
+		else                      		//Else (neither button is pressed)...
+		{
+			motor[Claw] = 0;    		//...stop the gripper.
 		}
 	}
 }
