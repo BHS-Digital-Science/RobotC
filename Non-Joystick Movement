@@ -6,21 +6,33 @@
 //=================================================================================================================================
 task main(){
 
+  waitUntil
 
 }
 
-task move(int spd, int ms){
+int move(int spd, int ms){
 
   motor[Left] = spd;
   motor[Right] = spd;
   wait1MSecond(ms);
+  return 1;
 
 }
 
-task turnLeft(int ms){
+int turnLeft(int ms){
 
-  motor[Left] = spd;
-  motor[Right] = spd;
+  motor[Left] = 63;
+  motor[Right] = -63;
   wait1MSecond(ms);
+  return 1;
+
+}
+
+int turnRight(int ms){
+
+  motor[Left] = -63;
+  motor[Right] = 63;
+  wait1MSecond(ms);
+  return 1;
 
 }
