@@ -6,8 +6,14 @@
 //=================================================================================================================================
 task main(){
 
-  waitUntil
-
+  waitUntil(move(63,3000) = 1);
+  waitUntil(turnLeft(2000) = 1);
+  waitUntil(move(63,2000) = 1);
+  waitUntil(turnRight(2000) = 1);
+  waitUntil(move(63,1000) = 1);
+  waitUntil(turnRight(2000) = 1);
+  waitUntil(move(63,500) = 1);
+  
 }
 
 int move(int spd, int ms){
