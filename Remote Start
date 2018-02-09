@@ -10,11 +10,11 @@ waitUntil(vexRT[Btn7D]==1);
 
 motor[left]=90;
 motor[right]=-90;
-wait1Msec(3000);
+wait1Msec(1800);
 
 motor[left]=-90;
 motor[right]=90;
-wait1Msec(3000);
+wait1Msec(1800);
 
 motor[left]=0;
 motor[right]=0;
