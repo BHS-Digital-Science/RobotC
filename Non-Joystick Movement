@@ -6,7 +6,7 @@
 int move(float spd, float ms){
 
   motor[left] = spd;
-  motor[right] = spd;
+  motor[right] = spd;//
   wait1Msec(ms);
   motor[left] = 0;
   motor[right] = 0;   
