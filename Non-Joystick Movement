@@ -14,7 +14,7 @@ int move(float spd, float ms){
 
 }
 
-int turnLeft(float spd, float ms){
+int turnRight(float spd, float ms){
 
   motor[left] = spd;
   motor[right] = -spd;
@@ -25,7 +25,7 @@ int turnLeft(float spd, float ms){
 
 }
 
-int turnRight(float spd, float ms){
+int turnLeft(float spd, float ms){
 
   motor[left] = -spd;
   motor[right] = spd;
@@ -33,12 +33,18 @@ int turnRight(float spd, float ms){
   motor[left] = 0;
   motor[right] = 0;  
   return 1;
+  
+  
 
 }
 
 task main(){
   while(1==1){
     waitUntil(vexRT[Btn7D] == 1);
-    waitUntil(move(90,3000) == 1);
+    waitUntil(move(90,2500) == 1);
+    waitUntil(turnRight(70,900)==1);
+    waitUntil(move(90,3000)==1);
+    waitUntil(turnRight(70,900)==1);
+    waitUntil(move(90,400)==1);
   }
 }
