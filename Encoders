@@ -1,3 +1,5 @@
+
+
 #pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
 #pragma config(Motor,  port1,           leftMotor,     tmotorVex393_HBridge, openLoop)
@@ -27,30 +29,81 @@
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
-task main()
-{
-	while(true){
-  	waitUntil(vexRT[Btn7D]==1);  // 2 Second Delay
-
+int moveStraight(int ticks, int maxSpd, int leftMin, int rightMin){
+	
   	//Clear Encoders
   	SensorValue[rightEncoder] = 0;
   	SensorValue[leftEncoder] = 0;
 
-  	while(SensorValue[leftEncoder] < 1800){  // While less than 5 rotations on the leftEncoder...
-    	//...Move Forward
+  	while(SensorValue[leftEncoder] < ticks){  // While less than "ticks" rotations on the leftEncoder...
+    	
+  		//...Auto Straightening
     	if(SensorValue[leftEncoder] > SensorValue[rightEncoder]){
-    		motor[leftMotor] = 42.5; 
-    		motor[rightMotor] = 63;
+    		
+    		motor[leftMotor] = leftMin; 
+    		motor[rightMotor] = maxSpd;
+    		
   		}else if(SensorValue[leftEncoder] < SensorValue[rightEncoder]){
-  	  	motor[leftMotor] = 63;
-    		motor[rightMotor] = 45; 
+  		
+  	  	motor[leftMotor] = maxSpd;
+    		motor[rightMotor] = rightMin; 
+    		
   		}else{
-  			motor[leftMotor] = 127;
-    		motor[rightMotor] = 127;
+  		
+  			motor[leftMotor] = maxSpd;
+    		motor[rightMotor] = maxSpd;
+    		
   		}
   	}
+  	
   	motor[leftMotor] = 0;
     motor[rightMotor] = 0;  	
+    return 1;
+    
+}
+
+int turnRight(float ticks, int maxSpd, int leftMin, int rightMin){
+	
+	  SensorValue[rightEncoder] = 0;
+  	SensorValue[leftEncoder] = 0;
+  	
+  	while(SensorValue[leftEncoder] < ticks){
+  		
+  		if(fabs(SensorValue[leftEncoder]) > fabs(SensorValue[rightEncoder])){
+  			
+  			motor[leftMotor] = leftMin;
+  			motor[rightMotor] = -maxSpd;
+  			
+  		}else if(fabs(SensorValue[leftEncoder]) < fabs(SensorValue[rightEncoder])){
+  		
+  			motor[leftMotor] = maxSpd;
+  			motor[rightMotor] = -rightMin;  		
+  			
+  		}else{
+ 
+  			motor[leftMotor] = maxSpd;
+  			motor[rightMotor] = -maxSpd;  		
+  		
+  		}
+  	
+  	}
+  	
+  	motor[leftMotor] = 0;
+    motor[rightMotor] = 0;    	
+  	
+		return 1;
+}
+
+int turnLeft(int ticks, int maxSpd, int leftMin, int rightMin){
+		return 1;
+}
+
+task main()
+{
+	while(true){
+  	waitUntil(vexRT[Btn7D]==1);  // 2 Second Delay
+  	waitUntil(turnRight(360,45,36,40)==1);
 	}
+
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
