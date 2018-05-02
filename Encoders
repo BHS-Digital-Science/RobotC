@@ -171,11 +171,14 @@ task main()
 
 			motor[leftMotor]  = (vexRT[Ch2] + vexRT[Ch1])/2;  // teleOp period
 			motor[rightMotor] = (vexRT[Ch2] - vexRT[Ch1])/2;
-
+			if(vexRT[Btn6U] == 1){ motor[armMotor] = 70; }else if(vexRT[Btn6D] == 1){ motor[armMotor] = -70; }else{ motor[armMotor] = 0; }
+			if(vexRT[Btn5U] == 1){ motor[clawMotor] = 70; }else if(vexRT[Btn5D] == 1){ motor[clawMotor] = -70; }else{ motor[clawMotor] = 0; }
+		
 		}
-  	motor[leftMotor] = 0;
+    motor[leftMotor] = 0;
     motor[rightMotor] = 0;
     motor[armMotor] = 0;
+    motor[clawMotor] = 0;
     //=======================================================================================================
 	}
 
